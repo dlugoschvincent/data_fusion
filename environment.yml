@@ -1,15 +1,11 @@
 name: data_fusion
 channels:
-  - defaults
+  - conda-forge
 dependencies:
-  - matplotlib
-  - numpy
   - rasterio
-  - scikit-learn
-  - ipykernel
   - plotly
-  - pandas
-  - nbformat
+  - scikit-learn
   - fiona
-  - altair
+  - ipykernel
+  - matplotlib
 prefix: /home/v/.conda/envs/data_fusion
