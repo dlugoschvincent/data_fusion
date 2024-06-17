@@ -8,4 +8,5 @@ dependencies:
   - fiona
   - ipykernel
   - matplotlib
+  - nbformat
 prefix: /home/v/.conda/envs/data_fusion
