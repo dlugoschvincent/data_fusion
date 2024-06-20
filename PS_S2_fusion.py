@@ -2,7 +2,7 @@ import glob
 import os
 import pickle
 import re
-from typing import Tuple, Dict
+from typing import Tuple, Dict, Union
 from sklearn.model_selection import train_test_split
 import plotly.graph_objects as go
 
@@ -262,7 +262,7 @@ class NDVIVisualizer:
 
     @staticmethod
     def visualize_scatter_plot(
-        X: np.ndarray, y: np.ndarray, model: LinearRegression | RandomForestRegressor
+        X: np.ndarray, y: np.ndarray, model: Union[LinearRegression, RandomForestRegressor]
     ):
         """Plots a scatter plot of Sentinel-2 NDVI vs. Planet NDVI,
         along with the regression line."""
