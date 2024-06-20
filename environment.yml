@@ -9,4 +9,5 @@ dependencies:
   - ipykernel
   - matplotlib
   - nbformat
+  - python=3.9
 prefix: /home/v/.conda/envs/data_fusion
