@@ -2,12 +2,17 @@ name: data_fusion
 channels:
   - conda-forge
 dependencies:
-  - rasterio
-  - plotly
-  - scikit-learn
   - fiona
   - ipykernel
+  - jupyter
+  - jupyter_client[version='<8']
   - matplotlib
   - nbformat
+  - notebook
+  - numpy
+  - plotly
   - python=3.9
-prefix: /home/v/.conda/envs/data_fusion
+  - pyzmq[version='<25']
+  - rasterio
+  - scikit-learn
+prefix: /home/dlugosch/miniconda3/envs/data_fusion
