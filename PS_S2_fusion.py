@@ -1,9 +1,5 @@
-import glob
-import os
-import pickle
 import re
-from typing import Tuple, Dict, Union
-from sklearn.model_selection import train_test_split
+from typing import Tuple, Dict, Union, Optional
 import plotly.graph_objects as go
 
 import matplotlib.pyplot as plt
@@ -13,12 +9,13 @@ import rasterio.crs
 from rasterio.warp import reproject, Resampling
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import MaxAbsScaler
 import random
 import fiona
 import rasterio
 from rasterio import features
+from pathlib import Path
+
 
 # Global Configuration (Consider using a configuration file)
 CONFIG = {"SCALE_DATA": False, "FILL_WITH_ZEROS": False, "MASK_MAIZE": True}
@@ -35,17 +32,17 @@ class NDVIDataLoader:
     """Handles loading and preprocessing NDVI image data."""
 
     @staticmethod
-    def extract_day_of_year(filename: str) -> int:
+    def extract_day_of_year(filename: str) -> Optional[int]:
         """Extracts the day of year (DOY) from a filename."""
         match = re.search(r"_doy_(\d+)", filename)
         return int(match.group(1)) if match else None
 
-    def load_ndvi_images(self, directory: str, pattern: str) -> Dict[int, NDVIImage]:
+    def load_ndvi_images(self, directory: Path, pattern: str) -> Dict[int, NDVIImage]:
         """Loads NDVI images and their metadata from a directory."""
-        image_files = glob.glob(os.path.join(directory, pattern))
+        image_files = directory.glob(pattern=pattern)
         images = {}
         for file in image_files:
-            day_of_year = self.extract_day_of_year(file)
+            day_of_year = self.extract_day_of_year(file.name)
             if day_of_year is not None:
                 with rasterio.open(file) as src:
                     images[day_of_year] = NDVIImage(src.read(1), src.transform, src.crs)
